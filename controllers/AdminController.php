@@ -180,24 +180,27 @@ class AdminController {
     /**
  * Affiche la page de monitoring des articles.
  * @return void
- */
+    */
     public function showMonitoring() : void
     {
-        $this->checkIfUserIsConnected();
+        if (!isset($_SESSION['user'])) {
+            Utils::redirect("connectionForm");
+        }
 
-        // On récupère les paramètres de tri (par défaut : date DESC).
-        $sort = Utils::request("sort", "date");
-        $order = Utils::request("order", "DESC");
+        // Récupération des paramètres de tri
+        $orderBy = Utils::request("orderBy", "date_creation");
+        $direction = Utils::request("direction", "DESC");
 
-        // On récupère les articles avec stats.
         $articleManager = new ArticleManager();
-        $articles = $articleManager->getArticlesWithStats($sort, $order);
+        $articles = $articleManager->getArticlesWithStats($orderBy, $direction);
 
-        // On affiche la page monitoring.
         $view = new View("Monitoring");
         $view->render("monitoring", [
-            'articles' => $articles
+            'articles' => $articles,
+            'orderBy' => $orderBy,
+            'direction' => $direction
         ]);
     }
+
 
 }

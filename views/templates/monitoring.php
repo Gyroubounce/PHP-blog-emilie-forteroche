@@ -17,20 +17,20 @@
     <!-- En-têtes avec tri -->
     <div class="articleLine header">
         <div class="title">
-            <a href="?sort=title&order=asc">Titre ▲</a>
-            <a href="?sort=title&order=desc">▼</a>
+            <a href="index.php?action=monitoring&orderBy=title&direction=ASC">Titre ▲</a>
+            <a href="index.php?action=monitoring&orderBy=title&direction=DESC">▼</a>
         </div>
         <div class="date">
-            <a href="?sort=date&order=asc">Date ▲</a>
-            <a href="?sort=date&order=desc">▼</a>
+            <a href="index.php?action=monitoring&orderBy=date_creation&direction=ASC">Date ▲</a>
+            <a href="index.php?action=monitoring&orderBy=date_creation&direction=DESC">▼</a>
         </div>
         <div class="views">
-            <a href="?sort=views&order=asc">Vues ▲</a>
-            <a href="?sort=views&order=desc">▼</a>
+            <a href="index.php?action=monitoring&orderBy=views&direction=ASC">Vues ▲</a>
+            <a href="index.php?action=monitoring&orderBy=views&direction=DESC">▼</a>
         </div>
         <div class="comments">
-            <a href="?sort=comment_count&order=asc">Commentaires ▲</a>
-            <a href="?sort=comment_count&order=desc">▼</a>
+            <a href="index.php?action=monitoring&orderBy=comment_count&direction=ASC">Commentaires ▲</a>
+            <a href="index.php?action=monitoring&orderBy=comment_count&direction=DESC">▼</a>
         </div>
     </div>
 

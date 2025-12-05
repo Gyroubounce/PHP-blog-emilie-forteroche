@@ -21,22 +21,36 @@ class ArticleController
      */
     public function showArticle() : void
     {
-        // Récupération de l'id de l'article demandé.
         $id = Utils::request("id", -1);
 
-        $articleManager = new ArticleManager();
-        $article = $articleManager->getArticleById($id);
-        
-        if (!$article) {
-            throw new Exception("L'article demandé n'existe pas.");
+        if ($id == -1) {
+            throw new Exception("Identifiant d'article invalide.");
         }
 
+        $articleManager = new ArticleManager();
+
+        // 🔥 Incrémentation des vues
+        $articleManager->incrementViews($id);
+
+        // Récupération de l'article
+        $article = $articleManager->getArticleById($id);
+
+        if (!$article) {
+            throw new Exception("Article introuvable.");
+        }
+
+        // Récupération des commentaires liés
         $commentManager = new CommentManager();
         $comments = $commentManager->getAllCommentsByArticleId($id);
 
-        $view = new View($article->getTitle());
-        $view->render("detailArticle", ['article' => $article, 'comments' => $comments]);
+        // Affichage de la vue
+        $view = new View("Article");
+        $view->render("showArticle", [
+            'article' => $article,
+            'comments' => $comments
+        ]);
     }
+
 
     /**
      * Affiche le formulaire d'ajout d'un article.
