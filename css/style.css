@@ -338,6 +338,47 @@ a.info {
 }
 
 /** 
+ * monitoring des articles
+ */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--headerColor);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.btn:hover {
+    background-color: var(--titleColor);
+}
+
+.adminTable {
+    width: 100%;
+    max-width: 1366px;
+    margin: auto;
+}
+
+.articleLine.header {
+    background-color: var(--headerColor);
+    color: white;
+    font-weight: bold;
+}
+
+.articleLine .date {
+    color: var(--dateColor);
+}
+
+.articleLine .views {
+    color: #333;
+}
+
+.articleLine .comments {
+    color: var(--commentColor);
+}
+
+/** 
  * Footer global de la page.
  */
 footer {

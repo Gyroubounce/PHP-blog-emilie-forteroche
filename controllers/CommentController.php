@@ -44,4 +44,49 @@ class CommentController
         // On redirige vers la page de l'article.
         Utils::redirect("showArticle", ['id' => $idArticle]);
     }
+
+    /**
+     * Affiche la page de gestion des commentaires (admin).
+     * @return void
+     */
+    public function showComments() : void
+    {
+        // Vérification que l'utilisateur est connecté (comme dans AdminController).
+        if (!isset($_SESSION['user'])) {
+            Utils::redirect("connectionForm");
+        }
+
+        // On récupère tous les commentaires.
+        $commentManager = new CommentManager();
+        $comments = $commentManager->getAllComments();
+
+        // On affiche la vue comments.php
+        $view = new View("Commentaires");
+        $view->render("comments", [
+            'comments' => $comments
+        ]);
+    }
+
+    /**
+     * Supprime un commentaire.
+     * @return void
+     */
+    public function deleteComment() : void
+    {
+        if (!isset($_SESSION['user'])) {
+            Utils::redirect("connectionForm");
+        }
+
+        $id = Utils::request("id", -1);
+
+        if ($id == -1) {
+            throw new Exception("Identifiant du commentaire invalide.");
+        }
+
+        $commentManager = new CommentManager();
+        $commentManager->deleteComment($id);
+
+        // Retour à la page de gestion des commentaires
+        Utils::redirect("comments");
+    }
 }

@@ -176,4 +176,28 @@ class AdminController {
         // On redirige vers la page d'administration.
         Utils::redirect("admin");
     }
+
+    /**
+ * Affiche la page de monitoring des articles.
+ * @return void
+ */
+    public function showMonitoring() : void
+    {
+        $this->checkIfUserIsConnected();
+
+        // On récupère les paramètres de tri (par défaut : date DESC).
+        $sort = Utils::request("sort", "date");
+        $order = Utils::request("order", "DESC");
+
+        // On récupère les articles avec stats.
+        $articleManager = new ArticleManager();
+        $articles = $articleManager->getArticlesWithStats($sort, $order);
+
+        // On affiche la page monitoring.
+        $view = new View("Monitoring");
+        $view->render("monitoring", [
+            'articles' => $articles
+        ]);
+    }
+
 }

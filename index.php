@@ -74,6 +74,22 @@ try {
             $adminController->deleteArticle();
             break;
 
+        case 'monitoring':
+            $adminController = new AdminController();
+            $adminController->showMonitoring();
+            break;
+
+        case 'comments':
+            $commentController = new CommentController();
+            $commentController->showComments();
+            break;
+
+        case 'deleteComment':
+            $commentController = new CommentController();
+            $commentController->deleteComment();
+            break;
+
+
         default:
             throw new Exception("La page demandée n'existe pas.");
     }

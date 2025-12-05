@@ -92,4 +92,41 @@ class ArticleManager extends AbstractEntityManager
         $sql = "DELETE FROM article WHERE id = :id";
         $this->db->query($sql, ['id' => $id]);
     }
+
+    /**
+ * Récupère les articles avec leurs statistiques (vues + nombre de commentaires).
+ * @param string $orderBy : colonne de tri (title, date_creation, views, comment_count).
+ * @param string $direction : sens du tri (ASC ou DESC).
+ * @return array : tableau associatif avec stats.
+ */
+    public function getArticlesWithStats(string $orderBy = 'date_creation', string $direction = 'DESC') : array
+    {
+        // Colonnes autorisées pour éviter les injections SQL
+        $allowed = ['title', 'date_creation', 'views', 'comment_count'];
+        if (!in_array($orderBy, $allowed)) {
+            $orderBy = 'date_creation';
+        }
+        $direction = strtoupper($direction) === 'ASC' ? 'ASC' : 'DESC';
+
+        $sql = "SELECT a.id, a.title, a.date_creation, a.views, COUNT(c.id) AS comment_count
+                FROM article a
+                LEFT JOIN comment c ON c.id_article = a.id
+                GROUP BY a.id
+                ORDER BY $orderBy $direction";
+
+        $result = $this->db->query($sql);
+        return $result->fetchAll();
+    }
+
+    /**
+ * Incrémente le compteur de vues d'un article.
+ * @param int $id : l'id de l'article.
+ * @return void
+ */
+    public function incrementViews(int $id) : void
+    {
+        $sql = "UPDATE article SET views = views + 1 WHERE id = :id";
+        $this->db->query($sql, ['id' => $id]);
+    }
+
 }
