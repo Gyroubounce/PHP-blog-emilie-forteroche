@@ -13,10 +13,10 @@
     <!-- En-tête -->
     <div class="commentLine header">
         <div class="cell title">Auteur</div>
-        <div class="cell content">Commentaire</div>
+        <div class="cell content">Commentaires</div>
         <div class="cell date">Date</div>
         <div class="cell article">Article</div>
-        <div class="cell actions">Actions</div>
+        <div class="cell actions">Action</div>
     </div>
 
     <!-- Boucle d'affichage -->

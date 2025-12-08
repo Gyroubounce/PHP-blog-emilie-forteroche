@@ -397,10 +397,10 @@ a.info {
 }
 
 /* Couleurs spécifiques si tu veux garder tes classes */
-.cell.title { font-weight: bold; min-width: 200px; }
-.cell.date { color: var(--dateColor, #555); }
-.cell.views { color: #333; }
-.cell.comments { color: var(--commentColor, #555); }
+.cell.title { font-weight: bold;}
+.cell.date { color: var(--dateColor, #555);}
+.cell.views { color: #333;}
+.cell.comments { color: var(--commentColor, #555); max-width: 10%;}
 
 /* Actions en bas */
 .monitoring-actions {
@@ -447,14 +447,6 @@ a.info {
     background-color: #fff;
     color: #000;
 }
-
-/* Colonnes spécifiques */
-.cell.title { font-weight: bold; width: 15%; }
-.cell.content { text-align: left; width: 40%; }
-.cell.date { width: 15%; color: var(--dateColor, #555); }
-.cell.article { width: 15%; }
-.cell.actions { width: 15%; }
-
 
 
 /** 

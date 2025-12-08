@@ -45,7 +45,8 @@ class CommentManager extends AbstractEntityManager
      */
     public function addComment(Comment $comment) : bool
     {
-        $sql = "INSERT INTO comment (pseudo, content, id_article, date_creation) VALUES (:pseudo, :content, :idArticle, NOW())";
+        $sql = "INSERT INTO comment (pseudo, content, id_article, date_creation) 
+                VALUES (:pseudo, :content, :idArticle, NOW())";
         $result = $this->db->query($sql, [
             'pseudo' => $comment->getPseudo(),
             'content' => $comment->getContent(),
@@ -55,18 +56,18 @@ class CommentManager extends AbstractEntityManager
     }
 
     /**
-     * Supprime un commentaire.
-     * @param Comment $comment : l'objet Comment à supprimer.
+     * Supprime un commentaire par son id.
+     * @param int $id : l'id du commentaire.
      * @return bool : true si la suppression a réussi, false sinon.
      */
-    public function deleteComment(Comment $comment) : bool
+    public function deleteCommentById(int $id) : bool
     {
         $sql = "DELETE FROM comment WHERE id = :id";
-        $result = $this->db->query($sql, ['id' => $comment->getId()]);
+        $result = $this->db->query($sql, ['id' => $id]);
         return $result->rowCount() > 0;
     }
 
-        /**
+    /**
      * Récupère tous les commentaires (admin).
      * @return array : tableau d'objets Comment.
      */
@@ -81,18 +82,4 @@ class CommentManager extends AbstractEntityManager
         }
         return $comments;
     }
-
-    /**
-     * Supprime un commentaire par son id (admin).
-     * @param int $id : l'id du commentaire.
-     * @return bool : true si la suppression a réussi, false sinon.
-     */
-    public function deleteCommentById(int $id) : bool
-    {
-        $sql = "DELETE FROM comment WHERE id = :id";
-        $result = $this->db->query($sql, ['id' => $id]);
-        return $result->rowCount() > 0;
-    }
-
-
 }

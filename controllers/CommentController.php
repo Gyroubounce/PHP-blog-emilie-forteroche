@@ -71,22 +71,27 @@ class CommentController
      * Supprime un commentaire.
      * @return void
      */
-    public function deleteComment() : void
-    {
-        if (!isset($_SESSION['user'])) {
-            Utils::redirect("connectionForm");
-        }
-
-        $id = Utils::request("id", -1);
-
-        if ($id == -1) {
-            throw new Exception("Identifiant du commentaire invalide.");
-        }
-
-        $commentManager = new CommentManager();
-        $commentManager->deleteComment($id);
-
-        // Retour à la page de gestion des commentaires
-        Utils::redirect("comments");
+public function deleteComment() : void
+{
+    if (!isset($_SESSION['user'])) {
+        Utils::redirect("connectionForm");
     }
+
+    $id = (int)Utils::request("id", -1);
+
+    if ($id <= 0) {
+        throw new Exception("Identifiant du commentaire invalide.");
+    }
+
+    $commentManager = new CommentManager();
+    $success = $commentManager->deleteCommentById($id);
+
+    if (!$success) {
+        throw new Exception("Erreur lors de la suppression du commentaire.");
+    }
+
+    // Retour à la page de gestion des commentaires
+    Utils::redirect("comments");
+}
+
 }
