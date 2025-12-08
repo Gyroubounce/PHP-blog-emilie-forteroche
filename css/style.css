@@ -337,46 +337,125 @@ a.info {
     border: 1px solid var(--backgroundColor);
 }
 
+.adminActions {
+    display: flex;
+    gap: 15px; /* espace automatique entre les boutons */
+}
+
+
 /** 
  * monitoring des articles
  */
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: var(--headerColor);
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    margin: 5px;
-}
 
-.btn:hover {
-    background-color: var(--titleColor);
-}
-
-.adminTable {
+.monitoringTable {
+    display: table;              /* structure tableau */
     width: 100%;
     max-width: 1366px;
     margin: auto;
+    border-collapse: collapse;   /* évite les doubles bordures */
 }
 
-.articleLine.header {
-    background-color: var(--headerColor);
-    color: white;
+.monitoringLine {
+    display: table-row;          /* chaque ligne = ligne du tableau */
+}
+
+.cell {
+    display: table-cell;         /* chaque cellule = cellule du tableau */
+    padding: 12px 16px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid var(--borderColor, #ddd);
+    box-sizing: border-box;
+}
+
+/* Header */
+.monitoringLine.header .cell {
+    background-color: var(--headerColor, #333);
+    color: #fff;
+    font-weight: bold;
+}
+.monitoringLine.header .label {
+    display: block;
+    margin-bottom: 4px;
+}
+.monitoringLine.header .arrows a {
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    margin: 0 2px;
+    line-height: 1.2;
+}
+
+/* Zébrage uniquement sur les lignes de données */
+.monitoringLine:nth-child(even):not(.header) .cell {
+    background-color: #99a140;
+    color: #fff;
+}
+.monitoringLine:nth-child(odd):not(.header) .cell {
+    background-color: #fff;
+    color: #000;
+}
+
+/* Couleurs spécifiques si tu veux garder tes classes */
+.cell.title { font-weight: bold; min-width: 200px; }
+.cell.date { color: var(--dateColor, #555); }
+.cell.views { color: #333; }
+.cell.comments { color: var(--commentColor, #555); }
+
+/* Actions en bas */
+.monitoring-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.commentTable {
+    display: table;
+    width: 100%;
+    max-width: 1366px;
+    margin: auto;
+    border-collapse: collapse;
+    border: 1px solid var(--borderColor, #ddd);
+}
+
+.commentLine {
+    display: table-row;
+}
+
+.commentLine .cell {
+    display: table-cell;
+    padding: 12px 16px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid var(--borderColor, #ddd);
+    box-sizing: border-box;
+}
+
+/* Header */
+.commentLine.header .cell {
+    background-color: var(--headerColor, #333);
+    color: #fff;
     font-weight: bold;
 }
 
-.articleLine .date {
-    color: var(--dateColor);
+/* Zébrage */
+.commentLine:nth-child(even):not(.header) .cell {
+    background-color: #99a140;
+    color: #fff;
+}
+.commentLine:nth-child(odd):not(.header) .cell {
+    background-color: #fff;
+    color: #000;
 }
 
-.articleLine .views {
-    color: #333;
-}
+/* Colonnes spécifiques */
+.cell.title { font-weight: bold; width: 15%; }
+.cell.content { text-align: left; width: 40%; }
+.cell.date { width: 15%; color: var(--dateColor, #555); }
+.cell.article { width: 15%; }
+.cell.actions { width: 15%; }
 
-.articleLine .comments {
-    color: var(--commentColor);
-}
+
 
 /** 
  * Footer global de la page.

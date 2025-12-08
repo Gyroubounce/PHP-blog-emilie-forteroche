@@ -6,32 +6,28 @@
  */
 ?>
 
-<h1>Gestion des commentaires</h1>
+<h2>Gestion des commentaires</h2>
 
-<div class="comment-actions">
-    <a href="index.php?action=admin" class="btn">Retour Admin</a>
-    <a href="index.php?action=monitoring" class="btn">Retour Monitoring</a>
-</div>
 
-<div class="adminTable">
+<div class="commentTable">
     <!-- En-tête -->
-    <div class="articleLine header">
-        <div class="title">Auteur</div>
-        <div class="content">Commentaire</div>
-        <div class="date">Date</div>
-        <div class="article">Article</div>
-        <div class="actions">Actions</div>
+    <div class="commentLine header">
+        <div class="cell title">Auteur</div>
+        <div class="cell content">Commentaire</div>
+        <div class="cell date">Date</div>
+        <div class="cell article">Article</div>
+        <div class="cell actions">Actions</div>
     </div>
 
     <!-- Boucle d'affichage -->
     <?php foreach ($comments as $comment): ?>
-        <div class="articleLine">
-            <div class="title"><?= htmlspecialchars($comment->getPseudo()) ?></div>
-            <div class="content"><?= htmlspecialchars($comment->getContent()) ?></div>
-            <div class="date"><?= htmlspecialchars($comment->getDateCreation()->format('d/m/Y H:i')) ?></div>
-            <div class="article"><?= htmlspecialchars($comment->getIdArticle()) ?></div>
-            <div class="actions">
-                <a class="btn" 
+        <div class="commentLine">
+            <div class="cell title"><?= htmlspecialchars($comment->getPseudo()) ?></div>
+            <div class="cell content"><?= htmlspecialchars($comment->getContent()) ?></div>
+            <div class="cell date"><?= htmlspecialchars($comment->getDateCreation()->format('d/m/Y H:i')) ?></div>
+            <div class="cell article"><?= htmlspecialchars($comment->getIdArticle()) ?></div>
+            <div class="cell actions">
+                <a class="submit" 
                    href="index.php?action=deleteComment&id=<?= $comment->getId() ?>"
                    <?= Utils::askConfirmation("Êtes-vous sûr de vouloir supprimer ce commentaire ?") ?>>
                    Supprimer
@@ -39,4 +35,9 @@
             </div>
         </div>
     <?php endforeach; ?>
+</div>
+
+<div class="monitoring-actions">
+    <a href="index.php?action=admin" class="submit">Retour Admin</a>
+    <a href="index.php?action=monitoring" class="submit">Retour Monitoring</a>
 </div>

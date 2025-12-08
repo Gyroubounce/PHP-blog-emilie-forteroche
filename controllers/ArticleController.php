@@ -45,7 +45,7 @@ class ArticleController
 
         // Affichage de la vue
         $view = new View("Article");
-        $view->render("showArticle", [
+        $view->render("detailArticle", [
             'article' => $article,
             'comments' => $comments
         ]);
